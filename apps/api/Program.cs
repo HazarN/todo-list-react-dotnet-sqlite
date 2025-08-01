@@ -2,6 +2,7 @@ using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
 using api.Data;
+using api.Repositories;
 
 DotEnv.Load();
 
@@ -14,8 +15,9 @@ builder.WebHost.UseUrls($"http://localhost:{port}");
 // Database connection SQLite
 var dbPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "app.db");
 var cnn = $"Data Source={dbPath}";
-
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(cnn));
+
+// CORS Policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -23,6 +25,10 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
+
+// Repository Mapping
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
