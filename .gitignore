@@ -1,0 +1,35 @@
+# General
+.vscode/
+**/.env
+.DS_Store
+*.save
+*.tmp
+
+
+# React
+apps/client/node_modules/
+apps/client/build/
+apps/client/.env.local
+apps/client/.env.*.local
+apps/client/.npm/
+apps/client/yarn-error.log
+apps/client/.cache/
+
+# .NET
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+/Data/app.db
+
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+
+
+# EditorConfig browser cache
+*.log
+
