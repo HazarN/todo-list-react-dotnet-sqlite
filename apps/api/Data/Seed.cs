@@ -10,26 +10,26 @@ public static class Seed
 
         var todos = new List<TodoItem>
         {
-            new() { Note = "Buy groceries", hasPriority = true },
-            new() { Note = "Finish project", hasPriority = false },
-            new() { Note = "Read a book", hasPriority = false },
-            new() { Note = "Call mom", hasPriority = true },
-            new() { Note = "Clean room", hasPriority = false },
-            new() { Note = "Write blog post", hasPriority = true },
-            new() { Note = "Update CV", hasPriority = false },
-            new() { Note = "Exercise", hasPriority = true },
-            new() { Note = "Fix the sink", hasPriority = false },
-            new() { Note = "Plan vacation", hasPriority = false },
-            new() { Note = "Learn EF Core", hasPriority = true },
-            new() { Note = "Walk the dog", hasPriority = false },
-            new() { Note = "Water plants", hasPriority = false },
-            new() { Note = "Attend meeting", hasPriority = true },
-            new() { Note = "Buy gift", hasPriority = true },
-            new() { Note = "Organize desk", hasPriority = false },
-            new() { Note = "Backup files", hasPriority = false },
-            new() { Note = "Refactor code", hasPriority = true },
-            new() { Note = "Write unit tests", hasPriority = false },
-            new() { Note = "Sleep early", hasPriority = false }
+            new() { Note = "Buy groceries", HasPriority = true },
+            new() { Note = "Finish project", HasPriority = false },
+            new() { Note = "Read a book", HasPriority = false },
+            new() { Note = "Call mom", HasPriority = true },
+            new() { Note = "Clean room", HasPriority = false },
+            new() { Note = "Write blog post", HasPriority = true },
+            new() { Note = "Update CV", HasPriority = false },
+            new() { Note = "Exercise", HasPriority = true },
+            new() { Note = "Fix the sink", HasPriority = false },
+            new() { Note = "Plan vacation", HasPriority = false },
+            new() { Note = "Learn EF Core", HasPriority = true },
+            new() { Note = "Walk the dog", HasPriority = false },
+            new() { Note = "Water plants", HasPriority = false },
+            new() { Note = "Attend meeting", HasPriority = true },
+            new() { Note = "Buy gift", HasPriority = true },
+            new() { Note = "Organize desk", HasPriority = false },
+            new() { Note = "Backup files", HasPriority = false },
+            new() { Note = "Refactor code", HasPriority = true },
+            new() { Note = "Write unit tests", HasPriority = false },
+            new() { Note = "Sleep early", HasPriority = false }
         };
 
         context.TodoItems.AddRange(todos);
