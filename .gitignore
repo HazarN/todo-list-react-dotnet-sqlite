@@ -21,7 +21,7 @@ apps/client/.cache/
 **/*.suo
 **/*.userosscache
 **/*.sln.docstates
-/Data/app.db
+apps/api/Data/app.db
 
 # Visual Studio
 .vs/
