@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using api.Data;
 using api.Repositories;
+using api.Services;
 
 DotEnv.Load();
 
@@ -26,8 +27,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Repository Mapping
+// Mappings
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

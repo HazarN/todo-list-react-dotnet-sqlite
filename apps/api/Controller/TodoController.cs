@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 using api.Models;
-using api.Repositories;
-using Microsoft.AspNetCore.Http.Features;
+using api.Services;
 
 namespace api.Controller
 {
@@ -10,57 +9,58 @@ namespace api.Controller
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        private readonly ITodoRepository repository;
+        private readonly ITodoService service;
 
-        public TodoController(ITodoRepository repository)
+        public TodoController(ITodoService service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<TodoItem>> GetTodos()
+        public async Task<ActionResult<TodoItem>> Get()
         {
-            var todos = await repository.GetAllAsync();
+            var todos = await service.GetTodos();
             return Ok(todos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoById(int id)
+        public async Task<ActionResult<TodoItem>> Get(int id)
         {
-            var todo = await repository.GetByIdAsync(id);
+            var todo = await service.GetTodoById(id);
 
             if (todo == null) return NotFound();
             return Ok(todo);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddTodo([FromBody] TodoItem item)
+        public async Task<ActionResult> Post([FromBody] TodoItem item)
         {
-            await repository.AddAsync(item);
+            await service.AddTodo(item);
 
-            return CreatedAtAction(nameof(GetTodoById), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateTodo([FromBody] TodoItem item, int id)
+        public async Task<ActionResult> Put(int id, [FromBody] TodoItemDto item)
         {
-            if (id != item.Id) return BadRequest();
-
-            var oldItem = await repository.GetByIdAsync(id);
+            var oldItem = await service.GetTodoById(id);
             if (oldItem == null) return NotFound();
 
-            await repository.UpdateAsync(item);
+            oldItem.Note = item.Note;
+            oldItem.HasPriority = item.HasPriority;
+            await service.UpdateTodo(oldItem);
             return NoContent();
         }
 
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteTodo(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var item = await repository.GetByIdAsync(id);
+            var item = await service.GetTodoById(id);
 
             if (item == null) return NotFound();
 
-            await repository.DeleteAsync(id);
+            await service.DeleteTodo(id);
             return NoContent();
         }
     }
