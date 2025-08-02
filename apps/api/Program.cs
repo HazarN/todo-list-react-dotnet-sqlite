@@ -1,3 +1,7 @@
+
+using dotenv.net;
+using Microsoft.EntityFrameworkCore;
+
 using api.Data;
 using api.Repositories;
 using api.Services;
