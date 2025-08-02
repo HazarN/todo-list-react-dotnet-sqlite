@@ -1,6 +1,3 @@
-using dotenv.net;
-using Microsoft.EntityFrameworkCore;
-
 using api.Data;
 using api.Repositories;
 using api.Services;
@@ -18,7 +15,7 @@ var dbPath = Path.Combine(builder.Environment.ContentRootPath, "Data", "app.db")
 var cnn = $"Data Source={dbPath}";
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(cnn));
 
-// CORS Policy
+// CORS policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -37,7 +34,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Middlewares
+// Swagger Development tool
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -49,7 +46,9 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
+
     context.Database.Migrate();
+
     Seed.Initialize(context);
 }
 
