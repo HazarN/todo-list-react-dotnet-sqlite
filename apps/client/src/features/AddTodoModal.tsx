@@ -6,8 +6,10 @@ import Button from '../ui/Button';
 
 type Props = {
   initialNote: string;
+  onClose: () => void;
 };
 function AddTodoModal({ initialNote }: Props) {
+  const [error, setError] = useState('');
   const [note, setNote] = useState(initialNote);
   const [hasPriority, setHasPriority] = useState(false);
 
@@ -19,7 +21,17 @@ function AddTodoModal({ initialNote }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!note.trim()) return;
+    if (!note.trim()) {
+      setError('Note is required');
+      return;
+    }
+
+    if (note.length < 3 || note.length > 100) {
+      setError('Note must be between 3 and 100 characters.');
+      return;
+    }
+
+    setError('');
 
     await addTodo(note, hasPriority);
     closeModal();
@@ -40,6 +52,7 @@ function AddTodoModal({ initialNote }: Props) {
             placeholder='Task note...'
             className='w-full p-3 border rounded focus:outline-none'
           />
+          {error && <p className='text-red-500'>{error}</p>}
 
           <label className='flex items-center gap-2'>
             <input

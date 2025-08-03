@@ -35,6 +35,9 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] TodoItem item)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             await service.AddTodo(item);
 
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
@@ -43,6 +46,9 @@ namespace api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] TodoItemDto item)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var oldItem = await service.GetTodoById(id);
             if (oldItem == null) return NotFound();
 

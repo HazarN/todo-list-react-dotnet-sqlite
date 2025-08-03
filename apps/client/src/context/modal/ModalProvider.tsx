@@ -1,5 +1,7 @@
-import AddTodoModal from '@root/src/features/AddTodoModal';
 import { useState, type ReactNode } from 'react';
+
+import AddTodoModal from '@app/features/AddTodoModal';
+
 import ModalContext from './ModalContext';
 
 type Props = {
@@ -13,6 +15,7 @@ function ModalProvider({ children }: Props) {
     setInitialNote(note);
     setIsOpen(true);
   };
+
   const closeModal = () => setIsOpen(false);
 
   return (
