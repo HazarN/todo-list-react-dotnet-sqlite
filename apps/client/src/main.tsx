@@ -6,11 +6,14 @@ import { TodoProvider } from '@app/context/todo/TodoProvider';
 import App from '@app/App.tsx';
 
 import '@app/globals.css';
+import ModalProvider from './context/modal/ModalProvider';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <TodoProvider>
-      <App />
+      <ModalProvider>
+        <App />
+      </ModalProvider>
     </TodoProvider>
   </StrictMode>
 );

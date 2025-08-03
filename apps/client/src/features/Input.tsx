@@ -1,30 +1,19 @@
 import { useRef, useState } from 'react';
 
 import useFocusByKeyDown from '@app/hooks/useFocusByKeyDown';
-import { useAddTodo } from '../hooks/api/useAddTodo';
-import { useTodoContext } from '../hooks/useTodoContext';
-import AddTodoModal from './AddTodoModal';
+import { useModalContext } from '../hooks/useModalContext';
 
 function Input() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { dispatch } = useTodoContext();
+  const { openModal } = useModalContext();
 
   const [input, setInput] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const addTodo = useAddTodo(dispatch);
 
   const handleClick = () => {
-    if (input.trim()) {
-      setIsModalOpen(true);
-    }
-  };
-  const handleAddTodo = async (note: string, hasPriority: boolean) => {
-    await addTodo(note, hasPriority);
+    if (!input.trim()) return;
 
-    setInput('');
-    inputRef.current?.focus();
+    openModal(input);
   };
 
   useFocusByKeyDown(inputRef);
@@ -48,14 +37,6 @@ function Input() {
           Add
         </button>
       </div>
-
-      {isModalOpen && (
-        <AddTodoModal
-          initialNote={input}
-          onClose={() => setIsModalOpen(false)}
-          onSubmit={handleAddTodo}
-        />
-      )}
     </section>
   );
 }

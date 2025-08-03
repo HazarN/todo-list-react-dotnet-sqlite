@@ -1,22 +1,28 @@
 import { useEffect, useState } from 'react';
+import { useAddTodo } from '../hooks/api/useAddTodo';
+import { useModalContext } from '../hooks/useModalContext';
+import { useTodoContext } from '../hooks/useTodoContext';
 import Button from '../ui/Button';
 
 type Props = {
   initialNote: string;
-  onClose: () => void;
-  onSubmit: (note: string, hasPriority: boolean) => void;
 };
-function AddTodoModal({ initialNote, onClose, onSubmit }: Props) {
+function AddTodoModal({ initialNote }: Props) {
   const [note, setNote] = useState(initialNote);
   const [hasPriority, setHasPriority] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { closeModal } = useModalContext();
+  const { dispatch } = useTodoContext();
+
+  const addTodo = useAddTodo(dispatch);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (note.trim()) {
-      onSubmit(note, hasPriority);
-      onClose();
-    }
+    if (!note.trim()) return;
+
+    await addTodo(note, hasPriority);
+    closeModal();
   };
 
   useEffect(() => {
@@ -48,7 +54,7 @@ function AddTodoModal({ initialNote, onClose, onSubmit }: Props) {
           <div className='flex justify-end gap-2'>
             <Button
               type='button'
-              onClick={onClose}
+              onClick={closeModal}
               className='bg-gray-200 hover:bg-gray-300 text-xl'
             >
               Cancel
