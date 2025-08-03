@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 
 import useFocusByKeyDown from '@app/hooks/useFocusByKeyDown';
+import { useAddTodo } from '../hooks/api/useAddTodo';
 import { useTodoContext } from '../hooks/useTodoContext';
 import AddTodoModal from './AddTodoModal';
 
@@ -12,21 +13,15 @@ function Input() {
   const [input, setInput] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const addTodo = useAddTodo(dispatch);
+
   const handleClick = () => {
     if (input.trim()) {
       setIsModalOpen(true);
     }
   };
-  const handleAddTodo = (note: string, hasPriority: boolean) => {
-    dispatch({
-      type: 'ADD_TODO',
-      payload: {
-        id: Date.now(),
-        note,
-        hasPriority,
-        isChecked: false,
-      },
-    });
+  const handleAddTodo = async (note: string, hasPriority: boolean) => {
+    await addTodo(note, hasPriority);
 
     setInput('');
     inputRef.current?.focus();

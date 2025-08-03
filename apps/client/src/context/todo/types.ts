@@ -11,8 +11,8 @@ export interface ITodoState {
 }
 
 export type TodoAction =
-  | { type: 'FETCH_TODOS_START' }
-  | { type: 'FETCH_TODOS_ERROR' }
+  | { type: 'ASYNC_TODOS_START' }
+  | { type: 'ASYNC_TODOS_ERROR' }
   | { type: 'SET_TODOS'; payload: ITodoItem[] }
   | { type: 'ADD_TODO'; payload: ITodoItem }
   | { type: 'REMOVE_TODO'; payload: number }

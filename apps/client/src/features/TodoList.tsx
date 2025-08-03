@@ -4,7 +4,7 @@ import TodoItem from '@app/features/TodoItem';
 
 import Error from '@app/ui/Error';
 import Spinner from '@app/ui/Spinner';
-import { useFetchTodos } from '../hooks/useFetchTodos';
+import { useFetchTodos } from '../hooks/api/useFetchTodos';
 
 function TodoList() {
   const { state, dispatch } = useTodoContext();

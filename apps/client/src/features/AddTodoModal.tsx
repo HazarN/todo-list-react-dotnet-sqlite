@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Button from '../ui/Button';
 
 type Props = {
   initialNote: string;
@@ -31,7 +32,7 @@ function AddTodoModal({ initialNote, onClose, onSubmit }: Props) {
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder='Task note...'
-            className='w-full p-3 border rounded'
+            className='w-full p-3 border rounded focus:outline-none'
           />
 
           <label className='flex items-center gap-2'>
@@ -39,25 +40,23 @@ function AddTodoModal({ initialNote, onClose, onSubmit }: Props) {
               type='checkbox'
               checked={hasPriority}
               onChange={() => setHasPriority((prev) => !prev)}
+              className='accent-purple-600'
             />
             High Priority
           </label>
 
           <div className='flex justify-end gap-2'>
-            <button
+            <Button
               type='button'
               onClick={onClose}
-              className='px-4 py-2 bg-gray-200 rounded hover:bg-gray-300'
+              className='bg-gray-200 hover:bg-gray-300 text-xl'
             >
               Cancel
-            </button>
+            </Button>
 
-            <button
-              type='submit'
-              className='px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700'
-            >
+            <Button type='submit' className='bg-purple-600 hover:bg-purple-700 text-white text-xl'>
               Add
-            </button>
+            </Button>
           </div>
         </form>
       </div>
