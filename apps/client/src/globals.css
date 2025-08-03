@@ -3,8 +3,8 @@
 @import 'tailwindcss';
 
 @layer base {
-  body {
-    @apply font-sans;
+  body div#root {
+    @apply font-sans w-screen h-screen bg-ui-purple flex justify-center items-center;
   }
 
   h1,

@@ -7,7 +7,10 @@ module.exports = {
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui'],
       },
       colors: {
-        uipurple: '#4B0082',
+        'ui-purple': '#4B0082',
+      },
+      boxShadow: {
+        'right-bottom': '12px 12px rgb(0, 0, 0)',
       },
     },
   },
