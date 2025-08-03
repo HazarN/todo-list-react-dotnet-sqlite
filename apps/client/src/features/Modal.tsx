@@ -14,6 +14,9 @@ type Props = {
   // for the edit mode
   todoId?: number;
 };
+
+// BUG: Edit functionality needs a mount (hemen refresh olmuyo editleyince)
+
 function Modal({ mode, initialNote, hasPriority: initialPriority, todoId }: Props) {
   const [error, setError] = useState('');
   const [note, setNote] = useState(initialNote);
