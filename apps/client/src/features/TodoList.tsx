@@ -21,9 +21,12 @@ function TodoList() {
               There are no tasks to be listed yet, start adding some!
             </h1>
           )}
+
           {status === 'loading' && <Spinner />}
+
           {status === 'error' && <Error />}
         </div>
+
         {status === 'success' && todos.map((todo) => <TodoItem todo={todo} key={todo.id} />)}
       </ul>
     </section>
