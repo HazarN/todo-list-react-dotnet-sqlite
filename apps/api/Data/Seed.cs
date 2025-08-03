@@ -2,13 +2,15 @@
 using api.Data;
 using api.Models;
 
-public static class Seed
+namespace api.Data
 {
-    public static void Initialize(ApplicationDbContext context)
+    public static class Seed
     {
-        if (context.TodoItems.Any()) return;
+        public static void Initialize(ApplicationDbContext context)
+        {
+            if (context.TodoItems.Any()) return;
 
-        var todos = new List<TodoItem>
+            var todos = new List<TodoItem>
         {
             new() { Note = "Buy groceries", HasPriority = true },
             new() { Note = "Finish project", HasPriority = false },
@@ -32,7 +34,8 @@ public static class Seed
             new() { Note = "Sleep early", HasPriority = false }
         };
 
-        context.TodoItems.AddRange(todos);
-        context.SaveChanges();
+            context.TodoItems.AddRange(todos);
+            context.SaveChanges();
+        }
     }
 }

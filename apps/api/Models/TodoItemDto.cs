@@ -4,5 +4,6 @@ namespace api.Models
     {
         public required string Note { get; set; }
         public bool HasPriority { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
