@@ -16,5 +16,6 @@ export type TodoAction =
   | { type: 'SET_TODOS'; payload: ITodoItem[] }
   | { type: 'ADD_TODO'; payload: ITodoItem }
   | { type: 'REMOVE_TODO'; payload: number }
+  | { type: 'EDIT_TODO'; payload: Partial<ITodoItem> }
   | { type: 'TOGGLE_TODO'; payload: number }
   | { type: 'TOGGLE_PRIORITY'; payload: number };

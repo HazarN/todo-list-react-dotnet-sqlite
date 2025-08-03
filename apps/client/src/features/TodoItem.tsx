@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 import { Delete, Edit } from 'lucide-react';
 
 import type { ITodoItem } from '@app/context/todo/types';
+import { useModalContext } from '../hooks/useModalContext';
 import Button from '../ui/Button';
 
 type Props = {
@@ -9,6 +10,8 @@ type Props = {
   Icon: LucideIcon;
 };
 function TodoItem({ todo, Icon }: Props) {
+  const { openModal } = useModalContext();
+
   return (
     <li className='bg-purple-100 p-3 rounded-lg shadow-sm flex flex-wrap justify-between gap-2 text-lg'>
       <div className='flex gap-5 items-center flex-1 min-w-0 flex-wrap'>
@@ -29,7 +32,18 @@ function TodoItem({ todo, Icon }: Props) {
           </div>
         )}
 
-        <Button>
+        <Button
+          onClick={() =>
+            openModal({
+              mode: 'edit',
+              todo: {
+                id: todo.id,
+                note: todo.note,
+                hasPriority: todo.hasPriority,
+              },
+            })
+          }
+        >
           <Edit />
         </Button>
 

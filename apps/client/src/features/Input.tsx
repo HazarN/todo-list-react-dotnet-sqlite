@@ -13,7 +13,13 @@ function Input() {
   const handleClick = () => {
     if (!input.trim()) return;
 
-    openModal(input);
+    openModal({
+      mode: 'add',
+      todo: {
+        note: input,
+        hasPriority: false,
+      },
+    });
   };
 
   useFocusByKeyDown(inputRef);

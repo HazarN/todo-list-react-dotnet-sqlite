@@ -1,22 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useAddTodo } from '../hooks/api/useAddTodo';
+import { useEditTodo } from '../hooks/api/useEditTodo';
 import { useModalContext } from '../hooks/useModalContext';
 import { useTodoContext } from '../hooks/useTodoContext';
 import Button from '../ui/Button';
 
 type Props = {
+  mode: 'add' | 'edit';
   initialNote: string;
+  hasPriority: boolean;
   onClose: () => void;
+
+  // for the edit mode
+  todoId?: number;
 };
-function AddTodoModal({ initialNote }: Props) {
+function Modal({ mode, initialNote, hasPriority: initialPriority, todoId }: Props) {
   const [error, setError] = useState('');
   const [note, setNote] = useState(initialNote);
-  const [hasPriority, setHasPriority] = useState(false);
+  const [hasPriority, setHasPriority] = useState(initialPriority);
 
   const { closeModal } = useModalContext();
   const { dispatch } = useTodoContext();
 
   const addTodo = useAddTodo(dispatch);
+  const editTodo = useEditTodo(dispatch);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +32,6 @@ function AddTodoModal({ initialNote }: Props) {
       setError('Note is required');
       return;
     }
-
     if (note.length < 3 || note.length > 100) {
       setError('Note must be between 3 and 100 characters.');
       return;
@@ -33,18 +39,23 @@ function AddTodoModal({ initialNote }: Props) {
 
     setError('');
 
-    await addTodo(note, hasPriority);
+    // FIXME: mod burda add ve edit diye ayrılcak
+
+    if (mode === 'add') await addTodo(note, hasPriority);
+    else if (mode === 'edit') editTodo(todoId as number, note, hasPriority);
+
     closeModal();
   };
 
   useEffect(() => {
     setNote(initialNote);
-  }, [initialNote]);
+    setHasPriority(initialPriority);
+  }, [initialNote, initialPriority]);
 
   return (
     <div className='fixed inset-0 z-50 bg-black/50 flex items-center justify-center'>
       <div className='bg-white p-6 rounded-xl shadow-lg w-full max-w-md'>
-        <h2 className='text-xl font-bold mb-4'>Add New Task</h2>
+        <h2 className='text-xl font-bold mb-4'>{mode === 'add' ? 'Add New Task' : 'Edit Task'}</h2>
         <form onSubmit={handleSubmit} className='space-y-4'>
           <input
             value={note}
@@ -82,4 +93,4 @@ function AddTodoModal({ initialNote }: Props) {
   );
 }
 
-export default AddTodoModal;
+export default Modal;

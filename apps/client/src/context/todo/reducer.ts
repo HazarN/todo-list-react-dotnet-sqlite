@@ -1,4 +1,4 @@
-import type { ITodoState, TodoAction } from '@app/context/todo/types';
+import type { ITodoItem, ITodoState, TodoAction } from '@app/context/todo/types';
 
 export default function todoReducer(state: ITodoState, action: TodoAction): ITodoState {
   switch (action.type) {
@@ -43,6 +43,15 @@ export default function todoReducer(state: ITodoState, action: TodoAction): ITod
         ),
         status: 'success',
       };
+    case 'EDIT_TODO':
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id ? (action.payload as ITodoItem) : todo
+        ),
+        status: 'success',
+      };
+
     case 'TOGGLE_PRIORITY':
       return {
         ...state,
