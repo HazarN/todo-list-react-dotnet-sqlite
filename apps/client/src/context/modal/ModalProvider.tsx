@@ -19,7 +19,7 @@ function ModalProvider({ children }: Props) {
   const closeModal = () => setIsOpen(false);
 
   return (
-    <ModalContext.Provider value={{ openModal, closeModal }}>
+    <ModalContext.Provider value={{ openModal, closeModal, isOpen }}>
       {children}
       {isOpen && <AddTodoModal initialNote={initialNote} onClose={closeModal} />}
     </ModalContext.Provider>

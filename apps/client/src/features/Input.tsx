@@ -1,12 +1,12 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import useFocusByKeyDown from '@app/hooks/useFocusByKeyDown';
 import { useModalContext } from '../hooks/useModalContext';
 
 function Input() {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const { openModal } = useModalContext();
+  const { openModal, isOpen } = useModalContext();
 
   const [input, setInput] = useState('');
 
@@ -18,12 +18,17 @@ function Input() {
 
   useFocusByKeyDown(inputRef);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setInput('');
+    }
+  }, [isOpen]);
+
   return (
     <section className='p-4 '>
-      <div className='relative'>
-        <input
-          type='text'
-          className='w-full text-xl bg-purple-50 rounded-4xl border-2 p-5 border-purple-500 focus:outline-none focus:bg-[#f3eaff] transition-all duration-300'
+      <div className='relative flex items-center'>
+        <textarea
+          className='w-full h-18 text-xl bg-purple-50 rounded-4xl border-2 p-5 border-purple-500 focus:outline-none focus:bg-[#f3eaff] transition-all duration-300'
           placeholder='Search for a task or create a new one...'
           ref={inputRef}
           value={input}

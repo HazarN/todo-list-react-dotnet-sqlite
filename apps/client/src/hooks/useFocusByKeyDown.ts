@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function useFocusByKeyDown(ref: React.RefObject<HTMLInputElement | null>) {
+export default function useFocusByKeyDown(ref: React.RefObject<HTMLTextAreaElement | null>) {
   useEffect(() => {
     const el = ref.current;
 

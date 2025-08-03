@@ -55,21 +55,20 @@ function AddTodoModal({ initialNote }: Props) {
           {error && <p className='text-red-500'>{error}</p>}
 
           <label className='flex items-center gap-2'>
-            <input
-              type='checkbox'
-              checked={hasPriority}
-              onChange={() => setHasPriority((prev) => !prev)}
-              className='accent-purple-600'
-            />
-            High Priority
+            <div className='flex gap-3'>
+              <input
+                type='checkbox'
+                checked={hasPriority}
+                onChange={() => setHasPriority((prev) => !prev)}
+                className='accent-purple-600 w-6 h-6'
+              />
+
+              <p>High Priority</p>
+            </div>
           </label>
 
           <div className='flex justify-end gap-2'>
-            <Button
-              type='button'
-              onClick={closeModal}
-              className='bg-gray-200 hover:bg-gray-300 text-xl'
-            >
+            <Button onClick={closeModal} className='bg-gray-200 hover:bg-gray-300 text-xl'>
               Cancel
             </Button>
 
