@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 import useFocusByKeyDown from '@app/hooks/useFocusByKeyDown';
-import { useModalContext } from '../hooks/useModalContext';
-import { capitalize } from '../utils/capitalize';
+import { useModalContext } from '@app/hooks/useModalContext';
+
+import { capitalize } from '@app/utils/capitalize';
 
 function Input() {
   const inputRef = useRef<HTMLTextAreaElement>(null);

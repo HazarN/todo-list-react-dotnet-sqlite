@@ -1,6 +1,7 @@
-import type { ITodoItem, TodoAction } from '@root/src/context/todo/types';
 import axios from 'axios';
 import { useCallback } from 'react';
+
+import type { ITodoItem, TodoAction } from '@app/context/todo/types';
 
 export function useSyncedChecked(dispatch: React.Dispatch<TodoAction>, todos: ITodoItem[]) {
   return useCallback(async () => {

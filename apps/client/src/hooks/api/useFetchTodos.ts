@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useCallback, useEffect } from 'react';
-import type { TodoAction } from '../../context/todo/types';
+
+import type { TodoAction } from '@app/context/todo/types';
 
 const fetch = async (dispatch: React.Dispatch<TodoAction>) => {
   dispatch({ type: 'ASYNC_TODOS_START' });

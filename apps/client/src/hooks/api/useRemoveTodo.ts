@@ -1,6 +1,7 @@
-import type { TodoAction } from '@root/src/context/todo/types';
 import axios from 'axios';
 import { useCallback } from 'react';
+
+import type { TodoAction } from '@app/context/todo/types';
 
 export function useRemoveTodo(dispatch: React.Dispatch<TodoAction>) {
   return useCallback(

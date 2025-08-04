@@ -1,10 +1,12 @@
 import Header from '@app/features/Header';
 import Input from '@app/features/Input';
 import TodoList from '@app/features/TodoList';
-import { useRefresh } from './hooks/api/useFetchTodos';
-import { useSyncedChecked } from './hooks/api/useSyncedChecked';
-import { useTodoContext } from './hooks/useTodoContext';
-import Button from './ui/Button';
+
+import { useRefresh } from '@app/hooks/api/useFetchTodos';
+import { useSyncedChecked } from '@app/hooks/api/useSyncedChecked';
+import { useTodoContext } from '@app/hooks/useTodoContext';
+
+import Button from '@app/ui/Button';
 
 function App() {
   const {

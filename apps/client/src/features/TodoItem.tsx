@@ -1,12 +1,14 @@
 import type { LucideIcon } from 'lucide-react';
 import { Delete, Edit } from 'lucide-react';
 
+import { useRefresh } from '@app/hooks/api/useFetchTodos';
+import { useRemoveTodo } from '@app/hooks/api/useRemoveTodo';
+import { useModalContext } from '@app/hooks/useModalContext';
+import { useTodoContext } from '@app/hooks/useTodoContext';
+
 import type { ITodoItem } from '@app/context/todo/types';
-import { useRefresh } from '../hooks/api/useFetchTodos';
-import { useRemoveTodo } from '../hooks/api/useRemoveTodo';
-import { useModalContext } from '../hooks/useModalContext';
-import { useTodoContext } from '../hooks/useTodoContext';
-import Button from '../ui/Button';
+
+import Button from '@app/ui/Button';
 
 type Props = {
   todo: ITodoItem;

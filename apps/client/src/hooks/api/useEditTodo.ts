@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useCallback } from 'react';
-import type { TodoAction } from '../../context/todo/types';
+
+import type { TodoAction } from '@app/context/todo/types';
 
 export function useEditTodo(dispatch: React.Dispatch<TodoAction>) {
   return useCallback(

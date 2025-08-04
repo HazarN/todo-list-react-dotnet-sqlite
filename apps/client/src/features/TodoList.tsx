@@ -1,14 +1,14 @@
 import { type LucideIcon } from 'lucide-react';
+import { useState } from 'react';
 
+import { useFetchTodos } from '@app/hooks/api/useFetchTodos';
 import { useTodoContext } from '@app/hooks/useTodoContext';
+import { shuffledIcons } from '@app/utils/iconShuffle';
 
 import TodoItem from '@app/features/TodoItem';
 
 import Error from '@app/ui/Error';
 import Spinner from '@app/ui/Spinner';
-import { useState } from 'react';
-import { useFetchTodos } from '../hooks/api/useFetchTodos';
-import { shuffledIcons } from '../utils/iconShuffle';
 
 function TodoList() {
   const { state, dispatch } = useTodoContext();

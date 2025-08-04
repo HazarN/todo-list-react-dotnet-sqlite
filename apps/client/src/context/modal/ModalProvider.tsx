@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from 'react';
 
-import Modal from '@root/src/features/Modal';
+import Modal from '@app/features/Modal';
 
-import ModalContext from './ModalContext';
-import type { ModalData } from './types';
+import ModalContext from '@app/context/modal/ModalContext';
+import type { ModalData } from '@app/context/modal/types';
 
 type Props = {
   children: ReactNode;
