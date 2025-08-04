@@ -22,9 +22,12 @@ function TodoList() {
     setSortByPriority((prev) => !prev);
   };
 
-  const sortedTodos = todos.slice().sort((a, b) => Number(b.hasPriority) - Number(a.hasPriority));
+  const todosReverted = todos.slice().sort((x, y) => y.id - x.id);
+  const sortedTodos = todosReverted
+    .slice()
+    .sort((x, y) => Number(y.hasPriority) - Number(x.hasPriority));
 
-  const list = sortByPriority ? todos : sortedTodos;
+  const list = sortByPriority ? todosReverted : sortedTodos;
 
   return (
     <section className='p-4 flex-1 overflow-hidden bg-purple-50 rounded-md relative'>
