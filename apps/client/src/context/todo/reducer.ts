@@ -51,7 +51,26 @@ export default function todoReducer(state: ITodoState, action: TodoAction): ITod
         ),
         status: 'success',
       };
-
+    case 'SYNCED_CHECKED':
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id
+            ? ({
+                ...todo,
+                isChecked: action.payload.isChecked,
+              } as ITodoItem)
+            : todo
+        ),
+        status: 'success',
+      };
+    case 'TOGGLE_CHECKED':
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.payload.id ? { ...todo, isChecked: !todo.isChecked } : todo
+        ),
+      };
     case 'TOGGLE_PRIORITY':
       return {
         ...state,

@@ -10,6 +10,7 @@ namespace api.Repositories
         Task<TodoItem?> GetByIdAsync(int id);
         Task AddAsync(TodoItem item);
         Task UpdateAsync(TodoItem item);
+        Task UpdateCheckedAsync(IEnumerable<int> ids);
         Task DeleteAsync(int id);
     }
 }

@@ -8,6 +8,7 @@ namespace api.Services
         Task<TodoItem?> GetTodoById(int id);
         Task AddTodo(TodoItem item);
         Task UpdateTodo(TodoItem item);
+        Task UpdateChecked(IEnumerable<int> ids);
         Task DeleteTodo(int id);
     }
 }

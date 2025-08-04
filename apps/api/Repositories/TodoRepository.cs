@@ -35,6 +35,18 @@ namespace api.Repositories
             await context.SaveChangesAsync();
         }
 
+        public async Task UpdateCheckedAsync(IEnumerable<int> ids)
+        {
+            var todos = await GetAllAsync();
+
+            foreach (var todo in todos)
+            {
+                todo.IsChecked = ids.Contains(todo.Id);
+            }
+
+            await context.SaveChangesAsync();
+        }
+
         public async Task DeleteAsync(int id)
         {
             var item = await GetByIdAsync(id);
@@ -46,5 +58,6 @@ namespace api.Repositories
             }
 
         }
+
     }
 }

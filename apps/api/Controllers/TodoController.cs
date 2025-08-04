@@ -54,8 +54,16 @@ namespace api.Controllers
 
             oldItem.Note = item.Note;
             oldItem.HasPriority = item.HasPriority;
+            oldItem.IsChecked = item.IsChecked;
 
             await service.UpdateTodo(oldItem);
+            return NoContent();
+        }
+
+        [HttpPut("check")]
+        public async Task<ActionResult> SyncCheckState([FromBody] int[] ids)
+        {
+            await service.UpdateChecked(ids);
             return NoContent();
         }
 

@@ -32,6 +32,11 @@ namespace api.Services
             return repository.UpdateAsync(item);
         }
 
+        public Task UpdateChecked(IEnumerable<int> ids)
+        {
+            return repository.UpdateCheckedAsync(ids);
+        }
+
         public Task DeleteTodo(int id)
         {
             return repository.DeleteAsync(id);

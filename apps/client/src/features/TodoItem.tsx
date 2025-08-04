@@ -2,7 +2,6 @@ import type { LucideIcon } from 'lucide-react';
 import { Delete, Edit } from 'lucide-react';
 
 import type { ITodoItem } from '@app/context/todo/types';
-import { useState } from 'react';
 import { useRefresh } from '../hooks/api/useFetchTodos';
 import { useRemoveTodo } from '../hooks/api/useRemoveTodo';
 import { useModalContext } from '../hooks/useModalContext';
@@ -14,8 +13,6 @@ type Props = {
   Icon: LucideIcon;
 };
 function TodoItem({ todo, Icon }: Props) {
-  const [isChecked, setIsChecked] = useState(false);
-
   const { openModal } = useModalContext();
   const { dispatch } = useTodoContext();
 
@@ -28,20 +25,25 @@ function TodoItem({ todo, Icon }: Props) {
   };
 
   return (
-    <li
-      className={`bg-purple-100 p-3 rounded-lg shadow-sm flex flex-wrap justify-between gap-2 text-lg ${
-        isChecked ? 'line-through text-gray-400' : ''
-      }`}
-    >
+    <li className='bg-purple-100 p-3 rounded-lg shadow-sm flex flex-wrap justify-between gap-2 text-lg'>
       <div className='flex gap-5 items-center flex-1 min-w-0 flex-wrap'>
         <input
           type='checkbox'
           className='accent-purple-600 w-6 h-6 cursor-pointer'
-          checked={isChecked}
-          onChange={() => setIsChecked((prev) => !prev)}
+          checked={todo.isChecked}
+          onChange={() =>
+            dispatch({
+              type: 'TOGGLE_CHECKED',
+              payload: { id: todo.id },
+            })
+          }
         />
 
-        <div className='flex gap-2 items-center flex-1 min-w-0'>
+        <div
+          className={`flex gap-2 items-center flex-1 min-w-0 ${
+            todo.isChecked ? 'line-through text-gray-400' : ''
+          }`}
+        >
           <div className='shrink-0'>
             <Icon />
           </div>

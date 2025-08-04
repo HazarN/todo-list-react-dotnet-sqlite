@@ -27,7 +27,7 @@ function TodoList() {
   const list = sortByPriority ? todos : sortedTodos;
 
   return (
-    <section className='p-4 flex-1 overflow-hidden bg-purple-50 rounded-md'>
+    <section className='p-4 flex-1 overflow-hidden bg-purple-50 rounded-md relative'>
       <div className='flex justify-end items-center mb-2'>
         <p
           className='text-purple-600 hover:text-purple-700 cursor-pointer underline'

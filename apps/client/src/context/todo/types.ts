@@ -17,5 +17,7 @@ export type TodoAction =
   | { type: 'ADD_TODO'; payload: ITodoItem }
   | { type: 'REMOVE_TODO'; payload: number }
   | { type: 'EDIT_TODO'; payload: Partial<ITodoItem> }
+  | { type: 'SYNCED_CHECKED'; payload: Partial<ITodoItem> }
   | { type: 'TOGGLE_TODO'; payload: number }
+  | { type: 'TOGGLE_CHECKED'; payload: Partial<ITodoItem> }
   | { type: 'TOGGLE_PRIORITY'; payload: number };
