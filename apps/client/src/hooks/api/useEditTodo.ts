@@ -13,7 +13,7 @@ export function useEditTodo(dispatch: React.Dispatch<TodoAction>) {
           hasPriority,
         });
 
-        if (res.status !== 204) throw new Error();
+        if (res.status !== 200) throw new Error();
 
         dispatch({ type: 'EDIT_TODO', payload: res.data });
       } catch {

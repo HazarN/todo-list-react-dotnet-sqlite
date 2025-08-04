@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAddTodo } from '../hooks/api/useAddTodo';
 import { useEditTodo } from '../hooks/api/useEditTodo';
+import { useRefresh } from '../hooks/api/useFetchTodos';
 import { useModalContext } from '../hooks/useModalContext';
 import { useTodoContext } from '../hooks/useTodoContext';
 import Button from '../ui/Button';
@@ -9,13 +10,12 @@ type Props = {
   mode: 'add' | 'edit';
   initialNote: string;
   hasPriority: boolean;
+
   onClose: () => void;
 
   // for the edit mode
   todoId?: number;
 };
-
-// BUG: Edit functionality needs a mount (hemen refresh olmuyo editleyince)
 
 function Modal({ mode, initialNote, hasPriority: initialPriority, todoId }: Props) {
   const [error, setError] = useState('');
@@ -25,6 +25,7 @@ function Modal({ mode, initialNote, hasPriority: initialPriority, todoId }: Prop
   const { closeModal } = useModalContext();
   const { dispatch } = useTodoContext();
 
+  const refresh = useRefresh(dispatch);
   const addTodo = useAddTodo(dispatch);
   const editTodo = useEditTodo(dispatch);
 
@@ -42,10 +43,9 @@ function Modal({ mode, initialNote, hasPriority: initialPriority, todoId }: Prop
 
     setError('');
 
-    // FIXME: mod burda add ve edit diye ayrılcak
-
     if (mode === 'add') await addTodo(note, hasPriority);
-    else if (mode === 'edit') editTodo(todoId as number, note, hasPriority);
+    else if (mode === 'edit') await editTodo(todoId as number, note, hasPriority);
+    await refresh(dispatch);
 
     closeModal();
   };

@@ -54,6 +54,7 @@ namespace api.Controllers
 
             oldItem.Note = item.Note;
             oldItem.HasPriority = item.HasPriority;
+
             await service.UpdateTodo(oldItem);
             return NoContent();
         }

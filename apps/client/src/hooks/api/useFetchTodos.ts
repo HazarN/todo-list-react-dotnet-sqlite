@@ -1,26 +1,28 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import type { TodoAction } from '../../context/todo/types';
 
+const fetch = async (dispatch: React.Dispatch<TodoAction>) => {
+  dispatch({ type: 'ASYNC_TODOS_START' });
+
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/Todo`);
+    dispatch({ type: 'SET_TODOS', payload: res.data });
+  } catch {
+    dispatch({ type: 'ASYNC_TODOS_ERROR' });
+  }
+};
+
 export function useFetchTodos(dispatch: React.Dispatch<TodoAction>) {
-  const apiUrl = (import.meta.env.VITE_API_URL as string) || undefined;
+  const fetchTodos = useCallback(fetch, [dispatch]);
 
   useEffect(() => {
-    async function fetchTodos() {
-      dispatch({ type: 'ASYNC_TODOS_START' });
+    fetchTodos(dispatch);
+  }, [fetchTodos, dispatch]);
 
-      try {
-        const res = await axios.get(`${apiUrl}/Todo`);
+  return { fetchTodos };
+}
 
-        // IDEA: When .env is not loaded, axios returns an html file, thus we need to check whether the data is an array or not
-        if (!Array.isArray(res.data)) throw new Error('Invalid data');
-
-        dispatch({ type: 'SET_TODOS', payload: res.data });
-      } catch {
-        dispatch({ type: 'ASYNC_TODOS_ERROR' });
-      }
-    }
-
-    fetchTodos();
-  }, [apiUrl, dispatch]);
+export function useRefresh(dispatch: React.Dispatch<TodoAction>) {
+  return useCallback(fetch, [dispatch]);
 }

@@ -7,7 +7,10 @@ export default function useFocusByKeyDown(ref: React.RefObject<HTMLTextAreaEleme
     if (!el) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') el.focus();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        el.focus();
+      }
       if (e.key === 'Escape') el.blur();
     };
 

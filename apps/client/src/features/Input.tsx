@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import useFocusByKeyDown from '@app/hooks/useFocusByKeyDown';
 import { useModalContext } from '../hooks/useModalContext';
+import { capitalize } from '../utils/capitalize';
 
 function Input() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -16,7 +17,7 @@ function Input() {
     openModal({
       mode: 'add',
       todo: {
-        note: input,
+        note: capitalize(input),
         hasPriority: false,
       },
     });
